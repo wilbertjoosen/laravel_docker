@@ -27,8 +27,13 @@ services:
     image: ambientum/php:7.2-nginx
     container_name: app
     volumes:
-      - ../laravel:/var/www/app
+      - ../carro_backend:/var/www/app
+    extra_hosts:
+        - "dockerhost:10.0.75.1"
     ports:
       - "80:8080"
     links:
       - mysql
+    environment:
+      - XDEBUG_ENABLED=true
+      - XDEBUG_CONFIG= "remotehost=10.0.75.1"
