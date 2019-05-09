@@ -13,7 +13,7 @@ services:
     image: mysql:5.7
     container_name: mysql
     volumes:
-      - mysql-data:/var/lib/mysql
+      - ./mysql-data:/var/lib/mysql
     ports:
       - "3306:3306"
     environment:
@@ -27,13 +27,15 @@ services:
     image: ambientum/php:7.2-nginx
     container_name: app
     volumes:
-      - ../carro_backend:/var/www/app
+      - ../queensystem/backend:/var/www/app
     extra_hosts:
         - "dockerhost:10.0.75.1"
+    expose:
+      - "9000"
     ports:
-      - "80:8080"
+      - "81:8080"
     links:
       - mysql
     environment:
       - XDEBUG_ENABLED=true
-      - XDEBUG_CONFIG= "remotehost=10.0.75.1"
+    #command: /var/www/app/start.sh
